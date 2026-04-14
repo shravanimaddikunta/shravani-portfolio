@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #1a6b4a;
+    --accent2: #e8f5f0;
+    --dark: #1a1a1a;
+    --mid: #555;
+    --light: #f8f8f6;
+    --border: #e0ddd8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--light); color: var(--dark); }
+
+  /* NAV */
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--mid); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-btn { background: var(--accent); color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+  /* HERO */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 5rem 3rem; background: white; }
+  .hero-badge { display: inline-block; background: var(--accent2); color: var(--accent); font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 20px; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: 3.2rem; line-height: 1.15; margin-bottom: 0.5rem; }
+  .hero h1 span { color: var(--accent); font-style: italic; }
+  .hero-role { font-size: 1.1rem; color: var(--mid); margin-bottom: 1.5rem; font-weight: 300; }
+  .hero-desc { font-size: 0.95rem; line-height: 1.8; color: #666; margin-bottom: 2rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--accent); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-outline { border: 1.5px solid var(--accent); color: var(--accent); padding: 0.75rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: background 0.2s; }
+  .btn-outline:hover { background: var(--accent2); }
+  .hero-img { display: flex; justify-content: center; }
+  .avatar-wrap { position: relative; }
+  .avatar { width: 280px; height: 340px; background: linear-gradient(135deg, #c8e6d8 0%, #a8d5c0 100%); border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 5rem; color: var(--accent); }
+  .avatar-card { position: absolute; bottom: -10px; right: -20px; background: white; border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1.2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .avatar-card .stat { font-size: 1.3rem; font-weight: 600; color: var(--accent); }
+  .avatar-card .stat-label { font-size: 0.7rem; color: var(--mid); }
+
+  /* SKILLS */
+  .section { padding: 4rem 3rem; }
+  .section-header { margin-bottom: 2.5rem; }
+  .section-tag { font-size: 0.75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 2rem; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .skill-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; transition: border-color 0.2s; }
+  .skill-card:hover { border-color: var(--accent); }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .skill-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .skill-level { font-size: 0.75rem; color: var(--mid); margin-bottom: 0.6rem; }
+  .skill-bar { height: 4px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .skill-fill { height: 100%; background: var(--accent); border-radius: 4px; }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .exp-card { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start; }
+  .exp-logo { width: 44px; height: 44px; border-radius: 10px; background: var(--accent2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .exp-role { font-weight: 600; font-size: 1rem; margin-bottom: 0.1rem; }
+  .exp-company { color: var(--accent); font-size: 0.85rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .exp-duration { font-size: 0.75rem; color: var(--mid); margin-bottom: 0.6rem; }
+  .exp-desc { font-size: 0.85rem; line-height: 1.7; color: #666; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+  .project-card { background: white; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.2s; }
+  .project-card:hover { transform: translateY(-3px); }
+  .project-thumb { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+  .project-body { padding: 1.2rem; }
+  .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+  .tag { font-size: 0.7rem; background: var(--accent2); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 500; }
+  .project-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem; }
+  .project-desc { font-size: 0.82rem; color: #666; line-height: 1.6; }
+
+  /* CONTACT */
+  .contact-section { background: var(--dark); color: white; padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-title { font-family: 'DM Serif Display', serif; font-size: 2.2rem; margin-bottom: 1rem; }
+  .contact-subtitle { color: #aaa; line-height: 1.7; font-size: 0.95rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: white; font-size: 0.9rem; padding: 0.8rem 1rem; border: 1px solid #333; border-radius: 10px; transition: border-color 0.2s, background 0.2s; }
+  .contact-link:hover { border-color: #1a6b4a; background: #1a2e26; }
+  .contact-link-icon { width: 32px; height: 32px; border-radius: 8px; background: #2a2a2a; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+  /* EDIT MODAL */
+  .edit-btn { position: fixed; bottom: 2rem; right: 2rem; background: var(--accent); color: white; border: none; width: 52px; height: 52px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 16px rgba(26,107,74,0.4); z-index: 200; transition: transform 0.2s; }
+  .edit-btn:hover { transform: scale(1.1); }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: white; border-radius: 16px; padding: 2rem; width: 90%; max-width: 500px; max-height: 85vh; overflow-y: auto; }
+  .modal h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--mid); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .form-group input, .form-group textarea { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.8rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .modal-btns { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+  .modal-save { background: var(--accent); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; }
+  .modal-cancel { background: none; border: 1px solid var(--border); padding: 0.6rem 1.5rem; border-radius: 8px; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .hero-img { order: -1; }
+    .avatar { width: 200px; height: 240px; }
+    .section { padding: 3rem 1.5rem; }
+    .contact-section { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" id="nav-name">Your Name</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Open to Work</div>
+    <h1>Hi, I'm <span id="hero-name">Your Name</span> 👋</h1>
+    <div class="hero-role" id="hero-role">Software Developer & Designer</div>
+    <div class="hero-desc" id="hero-desc">I build clean, user-friendly digital experiences. Passionate about solving real problems with elegant code and thoughtful design.</div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <div class="avatar-wrap">
+      <div class="avatar" id="hero-initial">YN</div>
+      <div class="avatar-card">
+        <div class="stat" id="hero-exp">2+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" style="background: var(--light);">
+  <div class="section-header">
+    <div class="section-tag">What I Do</div>
+    <div class="section-title">Skills & Expertise</div>
+  </div>
+  <div class="skills-grid" id="skills-grid">
+    <div class="skill-card"><div class="skill-icon">💻</div><div class="skill-name">Python</div><div class="skill-level">Advanced</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">HTML & CSS</div><div class="skill-level">Advanced</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">⚡</div><div class="skill-name">JavaScript</div><div class="skill-level">Intermediate</div><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🗄️</div><div class="skill-name">SQL</div><div class="skill-level">Intermediate</div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🎨</div><div class="skill-name">Figma / UI Design</div><div class="skill-level">Beginner</div><div class="skill-bar"><div class="skill-fill" style="width:50%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">📊</div><div class="skill-name">Data Analysis</div><div class="skill-level">Intermediate</div><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+  </div>
+</section>
+
+<section class="section" id="experience" style="background: white;">
+  <div class="section-header">
+    <div class="section-tag">Career</div>
+    <div class="section-title">Work Experience</div>
+  </div>
+  <div class="exp-list" id="exp-list">
+    <div class="exp-card">
+      <div class="exp-logo">🏢</div>
+      <div>
+        <div class="exp-role">Junior Developer</div>
+        <div class="exp-company">Tech Company Pvt Ltd</div>
+        <div class="exp-duration">Jan 2023 – Present · Hyderabad</div>
+        <div class="exp-desc">Built and maintained web applications using Python and JavaScript. Collaborated with cross-functional teams to deliver features on time.</div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-logo">🎓</div>
+      <div>
+        <div class="exp-role">Internship – Web Development</div>
+        <div class="exp-company">Startup / College Project</div>
+        <div class="exp-duration">Jun 2022 – Dec 2022 · Remote</div>
+        <div class="exp-desc">Developed responsive front-end components and assisted in database design during 6-month internship.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects" style="background: var(--light);">
+  <div class="section-header">
+    <div class="section-tag">Portfolio</div>
+    <div class="section-title">Projects</div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-thumb" style="background:#e8f5f0;">🛒</div>
+      <div class="project-body">
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Django</span><span class="tag">SQL</span></div>
+        <div class="project-name">E-commerce Website</div>
+        <div class="project-desc">Full-stack shopping app with product listings, cart, and payment integration built with Django.</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb" style="background:#fef3e2;">📊</div>
+      <div class="project-body">
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span></div>
+        <div class="project-name">Sales Dashboard</div>
+        <div class="project-desc">Data visualization dashboard analyzing regional sales trends with interactive charts and filters.</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb" style="background:#eef0ff;">🤖</div>
+      <div class="project-body">
+        <div class="project-tags"><span class="tag">ML</span><span class="tag">Python</span><span class="tag">Flask</span></div>
+        <div class="project-name">Resume Screener AI</div>
+        <div class="project-desc">Machine learning tool to rank resumes by job relevance using NLP and cosine similarity.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div>
+    <div class="contact-title">Let's Work Together</div>
+    <div class="contact-subtitle">I'm actively looking for new opportunities. Whether you have a role, a project, or just want to say hi — my inbox is always open!</div>
+  </div>
+  <div class="contact-links">
+    <a href="#" class="contact-link"><div class="contact-link-icon">📧</div><span id="contact-email">yourname@gmail.com</span></a>
+    <a href="#" class="contact-link"><div class="contact-link-icon">💼</div><span id="contact-linkedin">linkedin.com/in/yourname</span></a>
+    <a href="#" class="contact-link"><div class="contact-link-icon">💻</div><span id="contact-github">github.com/yourname</span></a>
+    <a href="#" class="contact-link"><div class="contact-link-icon">📱</div><span id="contact-phone">+91 XXXXX XXXXX</span></a>
+  </div>
+</section>
+
+<button class="edit-btn" onclick="document.getElementById('edit-modal').classList.add('open')" title="Edit your info">✏️</button>
+
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <h2>Edit Your Info</h2>
+    <div class="form-group"><label>Your Full Name</label><input id="f-name" placeholder="Ravi Kumar" /></div>
+    <div class="form-group"><label>Job Title / Role</label><input id="f-role" placeholder="Full Stack Developer" /></div>
+    <div class="form-group"><label>Years of Experience</label><input id="f-exp" placeholder="2+" /></div>
+    <div class="form-group"><label>About You (1-2 lines)</label><textarea id="f-desc" placeholder="I build clean, user-friendly digital experiences..."></textarea></div>
+    <div class="form-group"><label>Email</label><input id="f-email" placeholder="ravi@gmail.com" /></div>
+    <div class="form-group"><label>LinkedIn URL</label><input id="f-linkedin" placeholder="linkedin.com/in/ravi-kumar" /></div>
+    <div class="form-group"><label>GitHub URL</label><input id="f-github" placeholder="github.com/ravi-kumar" /></div>
+    <div class="form-group"><label>Phone</label><input id="f-phone" placeholder="+91 98765 43210" /></div>
+    <div class="modal-btns">
+      <button class="modal-save" onclick="saveInfo()">Save Changes</button>
+      <button class="modal-cancel" onclick="document.getElementById('edit-modal').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function saveInfo() {
+  const name = document.getElementById('f-name').value;
+  const role = document.getElementById('f-role').value;
+  const exp = document.getElementById('f-exp').value;
+  const desc = document.getElementById('f-desc').value;
+  const email = document.getElementById('f-email').value;
+  const linkedin = document.getElementById('f-linkedin').value;
+  const github = document.getElementById('f-github').value;
+  const phone = document.getElementById('f-phone').value;
+  
+  if (name) {
+    document.getElementById('nav-name').textContent = name;
+    document.getElementById('hero-name').textContent = name;
+    const initials = name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+    document.getElementById('hero-initial').textContent = initials;
+  }
+  if (role) document.getElementById('hero-role').textContent = role;
+  if (exp) document.getElementById('hero-exp').textContent = exp;
+  if (desc) document.getElementById('hero-desc').textContent = desc;
+  if (email) document.getElementById('contact-email').textContent = email;
+  if (linkedin) document.getElementById('contact-linkedin').textContent = linkedin;
+  if (github) document.getElementById('contact-github').textContent = github;
+  if (phone) document.getElementById('contact-phone').textContent = phone;
+  
+  document.getElementById('edit-modal').classList.remove('open');
+}
+</script>
+</body>
+</html>
