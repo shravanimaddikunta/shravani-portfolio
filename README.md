@@ -15,4 +15,4 @@ h1>Shravani</h1>
 </ul>
 
 <h2>Contact</h2>
-<p>Email: yourmail@gmail.com</p>
+<p>Email: shravanimaddikunta@gmail.com</p>
